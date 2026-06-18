@@ -1,5 +1,5 @@
 /**
- * INTEGRAÇÃO BLING → DFC 2026 — A Marca da Corujinha (v4.0)
+ * INTEGRAÇÃO BLING → DFC 2026 — A Marca da Corujinha (v4.1)
  * PARTE 2/5 — Helpers gerais, autenticação OAuth2 e API
  * Cada arquivo .gs é uma PARTE do MESMO projeto Apps Script.
  * Crie um arquivo de Script por parte e cole o conteúdo inteiro.

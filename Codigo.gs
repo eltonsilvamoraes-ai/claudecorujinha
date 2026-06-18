@@ -48,6 +48,10 @@ const NOME_ABA_DFC     = "DFC 2026";
 const TZ              = "America/Sao_Paulo";
 const DATA_CORTE_ISO  = "2026-06-01";           // início do período controlado
 const DATA_CORTE      = new Date(2026, 5, 1);
+// Fim do período controlado por ESTA DFC. Lançamentos com vencimento depois
+// desta data (ex.: contas fixas que se repetem em 2027+) NÃO entram nas abas
+// nem na DFC 2026 — só entrarão quando existir uma "DFC 2027".
+const DATA_FIM_ISO    = "2026-12-31";
 
 // Se true, lançamentos "Em atraso" (ainda não liquidados) entram na DFC
 // projetados na data de vencimento. Se false, só entram quando liquidados.
@@ -474,7 +478,7 @@ function sincronizarReceber() {
 
   function upsert(lanc, liquidado) {
     const vencISO = paraISO(lanc.vencimento);
-    if (!vencISO || vencISO < DATA_CORTE_ISO) return;
+    if (!vencISO || vencISO < DATA_CORTE_ISO || vencISO > DATA_FIM_ISO) return;
     const id = String(lanc.id);
     const existeIdx = mapa[id];
     const contato = (lanc.contato && lanc.contato.nome) || "";
@@ -556,7 +560,7 @@ function sincronizarPagar() {
 
   function upsert(lanc, liquidado) {
     const vencISO = paraISO(lanc.vencimento);
-    if (!vencISO || vencISO < DATA_CORTE_ISO) return;
+    if (!vencISO || vencISO < DATA_CORTE_ISO || vencISO > DATA_FIM_ISO) return;
     const id = String(lanc.id);
     const existeIdx = mapa[id];
 
@@ -763,7 +767,7 @@ function lancarNaDFC() {
   // Acumulador: linhaDFC → { colDFC → valor }
   const acum = {};
   function acumular(nomeLinha, dataISO, valor) {
-    if (!nomeLinha || !dataISO || dataISO < DATA_CORTE_ISO) return;
+    if (!nomeLinha || !dataISO || dataISO < DATA_CORTE_ISO || dataISO > DATA_FIM_ISO) return;
     const col = mapaCol[dataISO];
     const lin = mapaLinha[nomeLinha];
     if (!col || !lin) return;

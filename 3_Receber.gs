@@ -1,5 +1,5 @@
 /**
- * INTEGRAÇÃO BLING → DFC 2026 — A Marca da Corujinha (v4.0)
+ * INTEGRAÇÃO BLING → DFC 2026 — A Marca da Corujinha (v4.1)
  * PARTE 3/5 — Criar abas, índice e sincronizar Contas a Receber
  * Cada arquivo .gs é uma PARTE do MESMO projeto Apps Script.
  * Crie um arquivo de Script por parte e cole o conteúdo inteiro.
@@ -82,7 +82,7 @@ function sincronizarReceber() {
 
   function upsert(lanc, liquidado) {
     const vencISO = paraISO(lanc.vencimento);
-    if (!vencISO || vencISO < DATA_CORTE_ISO) return;
+    if (!vencISO || vencISO < DATA_CORTE_ISO || vencISO > DATA_FIM_ISO) return;
     const id = String(lanc.id);
     const existeIdx = mapa[id];
     const contato = (lanc.contato && lanc.contato.nome) || "";

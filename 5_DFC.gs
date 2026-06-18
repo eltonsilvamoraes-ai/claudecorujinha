@@ -1,5 +1,5 @@
 /**
- * INTEGRAÇÃO BLING → DFC 2026 — A Marca da Corujinha (v4.0)
+ * INTEGRAÇÃO BLING → DFC 2026 — A Marca da Corujinha (v4.1)
  * PARTE 5/5 — Lançamento na DFC e diagnósticos
  * Cada arquivo .gs é uma PARTE do MESMO projeto Apps Script.
  * Crie um arquivo de Script por parte e cole o conteúdo inteiro.
@@ -60,7 +60,7 @@ function lancarNaDFC() {
   // Acumulador: linhaDFC → { colDFC → valor }
   const acum = {};
   function acumular(nomeLinha, dataISO, valor) {
-    if (!nomeLinha || !dataISO || dataISO < DATA_CORTE_ISO) return;
+    if (!nomeLinha || !dataISO || dataISO < DATA_CORTE_ISO || dataISO > DATA_FIM_ISO) return;
     const col = mapaCol[dataISO];
     const lin = mapaLinha[nomeLinha];
     if (!col || !lin) return;

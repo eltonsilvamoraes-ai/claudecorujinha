@@ -1,5 +1,5 @@
 /**
- * INTEGRAÇÃO BLING → DFC 2026 — A Marca da Corujinha (v4.0)
+ * INTEGRAÇÃO BLING → DFC 2026 — A Marca da Corujinha (v4.1)
  * PARTE 1/5 — Configurações, colunas e mapas
  * Cada arquivo .gs é uma PARTE do MESMO projeto Apps Script.
  * Crie um arquivo de Script por parte e cole o conteúdo inteiro.
@@ -55,6 +55,10 @@ const NOME_ABA_DFC     = "DFC 2026";
 const TZ              = "America/Sao_Paulo";
 const DATA_CORTE_ISO  = "2026-06-01";           // início do período controlado
 const DATA_CORTE      = new Date(2026, 5, 1);
+// Fim do período controlado por ESTA DFC. Lançamentos com vencimento depois
+// desta data (ex.: contas fixas que se repetem em 2027+) NÃO entram nas abas
+// nem na DFC 2026 — só entrarão quando existir uma "DFC 2027".
+const DATA_FIM_ISO    = "2026-12-31";
 
 // Se true, lançamentos "Em atraso" (ainda não liquidados) entram na DFC
 // projetados na data de vencimento. Se false, só entram quando liquidados.
